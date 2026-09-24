@@ -10,9 +10,24 @@ dotenv.config();
 
 const app = express();
 
+const allowedOrigins = [
+  "https://lmsvhs.netlify.app",
+  "http://localhost:5173",
+  "http://localhost:3000"
+];
+
 app.use(cors({
-  origin: "https://lmsvhs.netlify.app/"
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  credentials: true
 }));
+
 
 app.use(express.json());
 
