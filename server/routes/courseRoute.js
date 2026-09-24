@@ -14,7 +14,7 @@ const courseRoute = express.Router()
 
 courseRoute.get("/", getCourses)
 
-courseRoute.post("/", protect, authorize("instructor", "admin"), createCourse)
+courseRoute.post("/", protect, authorize("instructor"), createCourse)
 
 courseRoute.get("/:id", getCourseByID)
 
@@ -22,4 +22,4 @@ courseRoute.put("/:id", protect, authorize("instructor", "admin"), updateCourse)
 
 courseRoute.delete("/:id", protect, authorize("instructor", "admin"), deleteCourse)
 
-module.exports = courseRoute
+module.exports = courseRoute  
